@@ -1,19 +1,16 @@
-// Biblioteca de acceso a datos inicial. Sustituir por cliente real (p.ej. Prisma/Knex).
-export type DatabaseClient = {
-  connect: () => Promise<void>;
-  disconnect: () => Promise<void>;
-};
+import { Pool } from 'pg'
 
-export const db: DatabaseClient = {
-  async connect() {
-    // NOTE: replace with real connection logic
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('[DB] connect (stub)');
-    }
-  },
-  async disconnect() {
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('[DB] disconnect (stub)');
-    }
-  },
-};
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+})
+
+export async function testConnection() {
+  try {
+    const result = await pool.query('SELECT NOW()')
+    console.log('✅ DB connected at:', result.rows[0].now)
+  } catch (err) {
+    console.error('❌ DB connection error:', err)
+  }
+}
+
+export default pool

@@ -1,6 +1,7 @@
 ## Dependencias principales
 npm install pg jsonwebtoken bcrypt zod axios
 
+
 | Paquete               | Uso                                               |
 |-----------------------|---------------------------------------------------|
 | `next`                | Framework                                         |

@@ -36,18 +36,17 @@ El proyecto sigue una **arquitectura modular en capas** o modular monolith, divi
 
 /src
     /modules
+        /auth
+            auth.service.ts
         /users
             user.model.ts
             user.service.ts
-            user.controller.ts
         /projects
             project.model.ts
             project.service.ts
-            project.controller.ts
         /tasks
             task.model.ts
             task.service.ts
-            task.controller.ts
         /analytics
             analytics.service.ts
     /app

@@ -1,1 +1,23 @@
-route.ts
+// src/app/api/analytics/route.ts
+import { NextResponse, NextRequest } from 'next/server'
+import { getProjectAnalytics } from '@/modules/analytics/services/analytics.service'
+import { authMiddleware } from '@/middleware/auth.middleware'
+
+// Este ejemplo asume que tienes un middleware que inyecta userId desde JWT
+export async function GET(request: NextRequest) {
+  try {
+    const auth = authMiddleware(request);
+    if (auth instanceof NextResponse) return auth;
+
+    const user_id = Number(request.headers.get('x-user-id')) // temporal, luego usar JWT middleware
+    if (!user_id) {
+      return NextResponse.json({ error: 'Missing user_id' }, { status: 401 })
+    }
+
+    const analytics = await getProjectAnalytics(user_id)
+    return NextResponse.json(analytics)
+  } catch (err: any) {
+    console.error('Error GET /api/analytics:', err)
+    return NextResponse.json({ error: 'Failed to fetch analytics' }, { status: 500 })
+  }
+}

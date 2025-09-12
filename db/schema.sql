@@ -1,4 +1,3 @@
--- db/schema.sql
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
