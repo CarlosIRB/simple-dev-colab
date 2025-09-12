@@ -109,7 +109,7 @@ export default function ProjectDetailPage() {
       });
       if (res.ok) {
         const data = await res.json();
-        setMembers(data); // asumimos {members: [{id,name,email}, ...]}
+        setMembers(data); 
 
       }
     }
@@ -248,7 +248,7 @@ export default function ProjectDetailPage() {
     return "border-red-300 bg-red-50"; // discarded
   }
 
-  // --- Render ---
+ 
   return (
     <ProtectedRoute>
       <div className="p-6 max-w-3xl mx-auto">

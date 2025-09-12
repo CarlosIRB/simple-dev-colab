@@ -6,10 +6,10 @@ import { useAuth } from '../../hooks/useAuth'
 export default function Navigation() {
   const { isLoading, isLoggedIn, user, logout } = useAuth()
 
-  // mientras determinamos el estado, no renderizamos nada
+
   if (isLoading) return null
 
-  // si no está logueado, no mostrar barra
+
   if (!isLoggedIn) return null
 
   return (

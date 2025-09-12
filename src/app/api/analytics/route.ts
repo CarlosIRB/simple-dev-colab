@@ -3,7 +3,7 @@ import { NextResponse, NextRequest } from 'next/server'
 import { getProjectAnalytics } from '@/modules/analytics/services/analytics.service'
 import { authMiddleware } from '@/middleware/auth.middleware'
 
-// Este ejemplo asume que tienes un middleware que inyecta userId desde JWT
+
 export async function GET(request: NextRequest) {
   try {
     const auth = authMiddleware(request);

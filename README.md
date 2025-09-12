@@ -43,7 +43,7 @@ Toda la documentación está en la carpeta `docs/`:
 - `conventions.md` → Reglas de nomenclatura, estilo, rutas y commits.  
 - `architecture.md` → Explicación de la arquitectura modular utilizada y su justificación.  
 - `database.md` → Diagrama y descripción del esquema relacional PostgreSQL.  
-- `deployment.md` → Guía para desplegar el proyecto en GCP (Cloud Run) *(opcional)*.
+- `deployment.md` → Guía para desplegar el proyecto en GCP (Cloud Run) 
 
 ---
 
@@ -78,7 +78,26 @@ La aplicación estará disponible en: http://localhost:3000
 
 ## Pruebas unitarias
 
+Se implementaron tests automatizados organizados en `__tests__`, cubriendo componentes, contextos y utilidades.  
 
+### Componentes
+- Ej: `Button`.
+- Se valida renderizado, variantes, clases CSS, estado `disabled` y manejo de eventos (`onClick`).
+
+### Contextos
+- Ej: `AuthContext` / `useAuth`.
+- Se prueba login, logout, carga de usuario desde token y almacenamiento en `localStorage`.
+
+### Utilidades
+- Funciones puras: sumar, validar emails, formatear fechas, capitalizar strings, generar IDs únicos.
+- Se asegura que devuelven resultados correctos ante distintos casos.
+
+### Propósito
+Garantizar que la UI, la lógica de sesión y los helpers funcionen correctamente, reduciendo riesgos de errores ante cambios futuros.
+
+### Cómo ejecutar
+```bash
+    > npm run test
 
 ## Despliegue en GCP
 

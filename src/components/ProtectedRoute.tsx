@@ -14,13 +14,13 @@ export default function ProtectedRoute({ children, fallback }: ProtectedRoutePro
   const router = useRouter()
 
   useEffect(() => {
-    // Si no está cargando y no está logueado, redirigir a login
+ 
     if (!isLoading && !isLoggedIn) {
       router.push('/login')
     }
   }, [isLoading, isLoggedIn, router])
 
-  // Mostrar loading mientras se verifica la autenticación
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -29,7 +29,7 @@ export default function ProtectedRoute({ children, fallback }: ProtectedRoutePro
     )
   }
 
-  // Si no está logueado, mostrar fallback o nada (se redirigirá)
+
   if (!isLoggedIn) {
     return fallback || (
       <div className="min-h-screen flex items-center justify-center">
@@ -38,6 +38,6 @@ export default function ProtectedRoute({ children, fallback }: ProtectedRoutePro
     )
   }
 
-  // Si está logueado, mostrar el contenido protegido
+
   return <>{children}</>
 }

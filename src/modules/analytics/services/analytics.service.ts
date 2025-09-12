@@ -3,8 +3,6 @@ import pool from '@/lib/db'
 import { ProjectAnalytics } from '@/modules/analytics/models/analytics.model'
 
 
-
-// Obtener proyectos donde el usuario está agregado
 export async function getUserProjects(user_id: number): Promise<{ id: number; name: string }[]> {
   const result = await pool.query(`
     SELECT p.id, p.name
@@ -17,7 +15,6 @@ export async function getUserProjects(user_id: number): Promise<{ id: number; na
   return result.rows
 }
 
-// Obtener estadísticas de tareas por proyecto
 export async function getProjectAnalytics(user_id: number): Promise<ProjectAnalytics[]> {
   const result = await pool.query(`
     SELECT 
@@ -38,7 +35,7 @@ export async function getProjectAnalytics(user_id: number): Promise<ProjectAnaly
   return result.rows
 }
 
-// Obtener estadísticas de tareas asignadas al usuario
+
 export async function getUserTaskAnalytics(user_id: number): Promise<{
   total: number;
   pending: number;

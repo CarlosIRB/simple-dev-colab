@@ -28,7 +28,6 @@ export async function getProjectById(id: number): Promise<Project | null> {
   return result.rows[0] || null
 }
 
-// Obtener proyectos en los que el usuario está agregado
 export async function getUserProjects(user_id: number): Promise<Project[]> {
   const result = await pool.query(`
     SELECT p.id, p.name, p.description, p.created_by, p.created_at

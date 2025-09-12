@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { verifyToken } from '@/modules/auth/services/auth.service'
 
-// Retorna NextResponse (error) o { userId } en éxito
+
 export function authMiddleware(request: NextRequest): NextResponse | { userId: number } {
   const authHeader = request.headers.get('Authorization')
   if (!authHeader?.startsWith('Bearer ')) {

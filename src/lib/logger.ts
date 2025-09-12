@@ -1,4 +1,3 @@
-// Logger simple con niveles y prefijos. Para prod, reemplazar por pino/winston.
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 
 const shouldLogDebug = () => process.env.NODE_ENV !== 'production';

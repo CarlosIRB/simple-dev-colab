@@ -29,7 +29,7 @@ export default function LoginPage() {
       const data = await res.json()
       if (!res.ok) throw new Error(data.message || 'Error')
       
-      // Usar el hook para manejar el login
+  
       login(data.token, data.user)
       router.push('/projects')
     } catch (err: any) {
