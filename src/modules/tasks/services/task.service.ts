@@ -5,19 +5,24 @@ import { Task } from '@/modules/tasks/models/task.model'
 
 
 export async function getTasksByProject(project_id: number): Promise<Task[]> {
-  const result = await pool.query(
-    'SELECT * FROM tasks WHERE project_id = $1 ORDER BY priority ASC, id ASC',
-    [project_id]
-  )
+  const result = await pool.query(`
+    SELECT 
+      t.*,
+      u.username as assigned_user_name
+    FROM tasks t
+    LEFT JOIN users u ON u.id = t.assigned_to
+    WHERE t.project_id = $1 
+    ORDER BY t.priority ASC, t.id ASC
+  `, [project_id])
   return result.rows
 }
 
-export async function getProjectByTaskId(task_id: number): Promise<Project | null> {
+export async function getProjectByTaskId(task_id: number): Promise<number | null> {
   const result = await pool.query(
     "SELECT project_id FROM tasks WHERE id = $1",
     [task_id]
   );
-  return result.rows[0] || null
+  return result.rows[0]?.project_id || null
 }
 
 export async function createTask(project_id: number, title: string, priority: number, assigned_to: number | null): Promise<Task> {
@@ -56,4 +61,10 @@ export async function updateTask(task_id: number, fields: { title?: string; prio
   )
 
   return result.rows[0] || null
+}
+
+
+export async function deleteTask(task_id:number){
+  const result = await pool.query('DELETE FROM tasks WHERE id = $1', [task_id])
+  return result
 }

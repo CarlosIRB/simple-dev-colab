@@ -12,8 +12,7 @@ export async function GET(request: NextRequest) {
   try {
     const auth = authMiddleware(request);
     if (auth instanceof NextResponse) return auth;
-
-    const user_id = Number(request.headers.get("x-user-id"));
+    const { userId: user_id } = auth
 
     const projects = await getUserProjects(user_id);
     return NextResponse.json(projects);
@@ -30,8 +29,7 @@ export async function POST(request: NextRequest) {
   try {
     const auth = authMiddleware(request);
     if (auth instanceof NextResponse) return auth;
-
-    const user_id = Number(request.headers.get('x-user-id'))
+    const { userId: user_id } = auth
     const body = await request.json();
     const { name, description } = body;
 
@@ -52,3 +50,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+

@@ -8,8 +8,8 @@ export async function GET(request: NextRequest) {
   try {
     const auth = authMiddleware(request);
     if (auth instanceof NextResponse) return auth;
-
-    const user_id = Number(request.headers.get('x-user-id')) // temporal, luego usar JWT middleware
+    const { userId } = auth
+    const user_id = userId
     if (!user_id) {
       return NextResponse.json({ error: 'Missing user_id' }, { status: 401 })
     }

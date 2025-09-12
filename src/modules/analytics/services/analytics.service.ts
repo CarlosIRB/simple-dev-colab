@@ -37,3 +37,23 @@ export async function getProjectAnalytics(user_id: number): Promise<ProjectAnaly
 
   return result.rows
 }
+
+// Obtener estadísticas de tareas asignadas al usuario
+export async function getUserTaskAnalytics(user_id: number): Promise<{
+  total: number;
+  pending: number;
+  completed: number;
+  discarded: number;
+}> {
+  const result = await pool.query(`
+    SELECT 
+      COUNT(*) AS total,
+      COUNT(CASE WHEN status='pending' THEN 1 END) AS pending,
+      COUNT(CASE WHEN status='completed' THEN 1 END) AS completed,
+      COUNT(CASE WHEN status='discarded' THEN 1 END) AS discarded
+    FROM tasks
+    WHERE assigned_to = $1
+  `, [user_id]);
+
+  return result.rows[0];
+}
