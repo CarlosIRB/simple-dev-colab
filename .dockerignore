@@ -11,5 +11,5 @@ yarn-error.log*
 Dockerfile*
 docker-compose*
 .DS_Store
-
+demo/
 
