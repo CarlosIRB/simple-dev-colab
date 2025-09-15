@@ -1,3 +1,4 @@
+// src/modules/auth/services/auth.service.ts
 import pool from '@/lib/db'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'

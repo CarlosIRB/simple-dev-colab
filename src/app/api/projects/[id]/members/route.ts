@@ -4,11 +4,13 @@ import{ addUserToProject, getProjectMembers } from '@/modules/projects/services/
 import { authMiddleware } from '@/middleware/auth.middleware'
 import { getUserByEmail } from '@/modules/users/services/user.service'
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+
+export async function GET(request: NextRequest,  { params }: { params: Promise<{ id: string }> }) {
   const auth = authMiddleware(request)
   if (auth instanceof NextResponse) return auth
+  const { id } = await params;
 
-  const project_id = Number(params.id)
+  const project_id = Number(id)
 
   const result = await getProjectMembers(project_id)
 
@@ -16,12 +18,13 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 }
 
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }>}) {
     const auth = authMiddleware(request)
     if (auth instanceof NextResponse) return auth
     const { userId: _ } = auth
   
-    const project_id = Number(params.id)
+    const { id } = await params;
+    const project_id = Number(id)
     const { email } = await request.json()
     if (!email) return NextResponse.json({ error: 'Missing email' }, { status: 400 })
   

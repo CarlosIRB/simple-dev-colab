@@ -6,24 +6,28 @@ import { getProjectByTaskId, deleteTask } from '@/modules/tasks/services/task.se
 import { getProjectById } from '@/modules/projects/services/project.service'
 import { updateTask } from '@/modules/tasks/services/task.service'
 
-export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }>}) {
   const auth = authMiddleware(request)
   if (auth instanceof NextResponse) return auth
 
-  const task_id = Number(params.id)
+
+  const { id } = await params
+  const task_id = Number(id)
   const body = await request.json()
 
   const updated = await updateTask(task_id, body)
   return NextResponse.json(updated)
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }>}) {
   try {
     const auth = authMiddleware(request)
     if (auth instanceof NextResponse) return auth
 
+    const { id } = await params;
+
     const { userId } = auth
-    const task_id = Number(params.id)
+    const task_id = Number(id)
 
     const project_id = await getProjectByTaskId(task_id)
     if (!project_id) return NextResponse.json({ error: 'Task not found' }, { status: 404 })
