@@ -15,6 +15,8 @@ Diseñada como ejercicio técnico para demostrar conocimientos en **Next.js + Ty
 - Crear, editar, completar o descartar tareas asociadas a cada proyecto.
 - Consultar métricas agregadas de los proyectos en un panel de **Analytics**.
 
+### Demo video 
+Descargar para visualizar
 [![Ver demo](demo/demo.png)](demo/demo.mp4)
 
 Este proyecto busca demostrar:
