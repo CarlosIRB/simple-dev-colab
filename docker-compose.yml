@@ -1,15 +1,15 @@
 version: "3.9"
 
 services:
-  db:
-    image: postgres:16-alpine
-    restart: always
-    env_file: .env
-    volumes:
-      - db-data:/var/lib/postgresql/data
-      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-    ports:
-      - "5432:5432"
+  # db:
+  #   image: postgres:16-alpine
+  #   restart: always
+  #   env_file: .env
+  #   volumes:
+  #     - db-data:/var/lib/postgresql/data
+  #     - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+  #   ports:
+  #     - "5432:5432"
 
   app:
     build:
@@ -29,10 +29,10 @@ services:
       # - FAST_REFRESH=true
     ports:
       - "3000:3000"
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
     # Configuración para desarrollo
     # stdin_open: true
     # tty: true
-volumes:
-  db-data:
+# volumes:
+#   db-data:
